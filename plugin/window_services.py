@@ -2,7 +2,10 @@ import os
 import subprocess
 from flox import Flox
 
-import psutil
+try:
+    import psutil
+except ImportError:
+    pass
 
 FILE_DIR = os.path.abspath(os.path.dirname(__file__))
 PLUGIN_ROOT = os.path.dirname(FILE_DIR)
