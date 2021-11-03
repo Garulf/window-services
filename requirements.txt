@@ -1,2 +1,2 @@
 git+git://github.com/garulf/flox@v0.3.2#egg=flox
-psutil==4.2.0
+psutil==4.3.0
