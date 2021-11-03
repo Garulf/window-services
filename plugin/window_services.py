@@ -21,7 +21,7 @@ class WindowServices(Flox):
         if service_state.lower() == "running":
             return SERVICE_RUNNING
         elif service_state.lower() == "stopped":
-            return SERVICE_RUNNING
+            return SERVICE_STOPPED
 
 
 
