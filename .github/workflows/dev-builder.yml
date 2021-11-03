@@ -1,4 +1,6 @@
 name: "Dev-Builder"
+env:
+  PYTHON_VER: 3.8
 on:
   workflow_dispatch:
 jobs:
