@@ -1,0 +1,10 @@
+icons/*
+.git*/
+README.*
+requirements*.txt
+bin/
+assets/
+.gitignore
+*.log
+*.zip
+.gitattributes

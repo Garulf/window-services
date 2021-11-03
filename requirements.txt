@@ -1,0 +1,2 @@
+git+git://github.com/garulf/flox@v0.3.2#egg=flox
+psutil==5.8.0
