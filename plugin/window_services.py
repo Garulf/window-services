@@ -3,7 +3,7 @@ import subprocess
 from flox import Flox
 
 
-import psutil
+import services as s
 
 
 FILE_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -15,6 +15,11 @@ SERVICE_START = os.path.join(ICON_DIR, "play.png")
 SERVICE_STOP = os.path.join(ICON_DIR, "stop.png")
 BAT_FILE = "toggle_service.bat"
 
+class CannotFindFile(Exception):
+    
+    def __init__(self, message):
+        self.message = message
+        super().__init__(self.message)
 class WindowServices(Flox):
 
     def service_icon(self, service_state):
@@ -23,19 +28,16 @@ class WindowServices(Flox):
         elif service_state.lower() == "stopped":
             return SERVICE_STOPPED
 
-
-
     def query(self, query):
-        services = psutil.win_service_iter()
+        services = s.get_services()
         for service in services:
-            if query.lower() in service.name().lower() or query.lower() in service.display_name().lower():
-                title = f'{service.name()} ({service.display_name()})'
+            if query.lower() in service.name.lower() or query.lower() in service.display_name.lower():
                 # self.logger.info(dir(service))
                 self.add_item(
-                    title=title,
-                    subtitle=service.status().upper().replace("_", " "),
-                    icon=self.service_icon(service.status()),
-                    context=[service.name()]
+                    title=str(service),
+                    subtitle=service.status.upper().replace("_", " "),
+                    icon=self.service_icon(service.status),
+                    context=[service.name]
                 )
 
     def context_menu(self, data): 
@@ -57,10 +59,12 @@ class WindowServices(Flox):
 
     def control_service(self, service_name, state):
         bat_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), BAT_FILE)
-        p = subprocess.Popen(f'Powershell -Command "Start-Process "{bat_path}" -ArgumentList "{state}","{service_name}" -Verb RunAs -WindowStyle Hidden"', stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
-        out, err = p.communicate()
-        self.logger.info(out)
-        self.logger.error(err)
+        p = subprocess.Popen(f'Powershell -Command "Start-Process "sc" -ArgumentList "{state}","{service_name}" -Verb RunAs -WindowStyle Hidden"', stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+        exit_code = p.wait()
+        if exit_code != 0:
+            out, err = p.communicate()
+            if "canceled" not in str(err):
+                self.logger.error(err.decode("utf-8"))
 
 if __name__ == "__main__":
     WindowServices()
