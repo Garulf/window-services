@@ -1,12 +1,12 @@
 {
-    "ID": "C7E78C47FA5942E4B7972EAD844F5007",
-    "ActionKeyword": "ws",
-    "Name": "Window Services",
-    "Description": "Start and stop Windows services.",
-    "Author": "Garulf",
-    "Version": "0.2.0",
-    "Language": "python",
-    "Website": "https://github.com/Garulf/window-services",
-    "IcoPath": "./icons/cog.png",
-    "ExecuteFileName": "run.py"
+  "ID": "C7E78C47FA5942E4B7972EAD844F5007",
+  "ActionKeyword": "ws",
+  "Name": "Window Services",
+  "Description": "Start and stop Windows services.",
+  "Author": "Garulf",
+  "Version": "1.1.0",
+  "Language": "python",
+  "Website": "https://github.com/Garulf/window-services",
+  "IcoPath": "./icons/cog.png",
+  "ExecuteFileName": "run.py"
 }
