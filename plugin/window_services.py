@@ -33,11 +33,14 @@ class WindowServices(Flox):
         for service in services:
             if query.lower() in service.name.lower() or query.lower() in service.display_name.lower():
                 # self.logger.info(dir(service))
+                subtitle = f'{service.status.upper().replace("_", " ")} - Press ENTER to toggle service'
                 self.add_item(
                     title=str(service),
-                    subtitle=service.status.upper().replace("_", " "),
+                    subtitle=subtitle,
                     icon=self.service_icon(service.status),
-                    context=[service.name]
+                    context=[service.name],
+                    method='toggle_service',
+                    parameters=[service.name, service.status]
                 )
 
     def context_menu(self, data): 
@@ -65,6 +68,13 @@ class WindowServices(Flox):
             out, err = p.communicate()
             if "canceled" not in str(err):
                 self.logger.error(err.decode("utf-8"))
+
+    def toggle_service(self, service_name, status):
+        if status.lower() == "running":
+            self.control_service(service_name, 'stop')
+        elif status.lower() == "stopped":
+            self.control_service(service_name, 'start')
+
 
 if __name__ == "__main__":
     WindowServices()
