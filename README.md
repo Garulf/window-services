@@ -4,7 +4,7 @@ List, Start & Stop Window services
 (Tested on Win10 & Win11)
 
 # Installation:
-## ~~`pm install window-services`~~
+## `pm install window-services`
 # Keyword: 
 ## `ws`
 
