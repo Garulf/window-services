@@ -9,4 +9,4 @@ List, Start & Stop Window services
 ## `ws`
 
 # Special Thanks:
-[@taooceros](https://github.com/taooceros) & [@onesounds](https://github.com/onesounds) for help testing
+[@taooceros](https://github.com/taooceros) & [@onesounds](https://github.com/onesounds)
