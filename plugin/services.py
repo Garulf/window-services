@@ -1,5 +1,7 @@
 import subprocess as sp
+import logging
 
+logger = logging.getLogger('')
 
 class Service(object):
 
@@ -34,7 +36,13 @@ class Service(object):
 def get_services():
     services_list = []
 
-    services = sp.check_output("sc query type= service state= all", shell=True).decode("utf-8").split("\r\n\r\n")
+    services = sp.check_output("sc query type= service state= all",text=True, shell=True)
+    try:
+        services = services.split("\n\n")
+        logger.info(services)
+    except UnicodeDecodeError:
+        logger.exception(f"########################### Command line output ###########################\n{services}\n########################### End Output ###########################")
+        raise
     for service in services:
         if "SERVICE_NAME" in service.split("\n")[0]:
             service = Service(service)
