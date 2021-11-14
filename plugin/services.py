@@ -36,9 +36,10 @@ class Service(object):
 def get_services():
     services_list = []
 
-    services = sp.check_output("sc query type= service state= all", shell=True)
+    services = sp.check_output("sc query type= service state= all",text=True, shell=True)
     try:
-        services = services.decode("windows-1252", errors="ignore").split("\r\n\r\n")
+        services = services.split("\n\n")
+        logger.info(services)
     except UnicodeDecodeError:
         logger.exception(f"########################### Command line output ###########################\n{services}\n########################### End Output ###########################")
         raise
