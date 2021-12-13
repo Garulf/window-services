@@ -33,7 +33,7 @@ class Service(object):
 
 def get_services():
     services_list = []
-    code_page = sp.check_output("chcp", shell=True).decode("utf-8").split(":")[1].strip()
+    code_page = sp.check_output("chcp", shell=True, text=True).split(":")[1].strip()
 
     output = sp.check_output("sc query type= service state= all", shell=True)
     try:
