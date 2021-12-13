@@ -33,8 +33,10 @@ class Service(object):
 
 def get_services():
     services_list = []
+    code_page = sp.check_output("chcp", shell=True).decode("utf-8").split(":")[1].strip()
 
-    services = sp.check_output("sc query type= service state= all", shell=True).decode("utf-8").split("\r\n\r\n")
+    output = sp.check_output("sc query type= service state= all", shell=True)
+    services = output.decode(f"cp{code_page}").split("\r\n\r\n")
     for service in services:
         if "SERVICE_NAME" in service.split("\n")[0]:
             service = Service(service)
