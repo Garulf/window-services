@@ -36,8 +36,11 @@ def get_services():
     code_page = sp.check_output("chcp", shell=True).decode("utf-8").split(":")[1].strip()
 
     output = sp.check_output("sc query type= service state= all", shell=True)
-    services = output.decode(f"cp{code_page}").split("\r\n\r\n")
-    for service in services:
+    try:
+        services = output.decode(f"cp{code_page}")
+    except UnicodeDecodeError:
+        services = output.decode("utf-8", errors="replace")
+    for service in services.split("\r\n\r\n"):
         if "SERVICE_NAME" in service.split("\n")[0]:
             service = Service(service)
             services_list.append(service)
@@ -45,3 +48,4 @@ def get_services():
     return services_list
 
 
+get_services()
