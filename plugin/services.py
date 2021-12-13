@@ -33,13 +33,16 @@ class Service(object):
 
 def get_services():
     services_list = []
+    code_page = sp.check_output("chcp", shell=True).decode("utf-8").split(":")[1].strip()
 
-    services = sp.check_output("sc query type= service state= all", shell=True).decode("utf-8").split("\r\n\r\n")
-    for service in services:
+    output = sp.check_output("sc query type= service state= all", shell=True)
+    try:
+        services = output.decode(f"cp{code_page}")
+    except (UnicodeDecodeError, LookupError):
+        services = output.decode("utf-8", errors="replace")
+    for service in services.split("\r\n\r\n"):
         if "SERVICE_NAME" in service.split("\n")[0]:
             service = Service(service)
             services_list.append(service)
 
     return services_list
-
-
