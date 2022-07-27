@@ -62,7 +62,7 @@ class WindowServices(Flox):
 
     def control_service(self, service_name, state):
         bat_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), BAT_FILE)
-        p = subprocess.Popen(f'Powershell -Command "Start-Process "sc" -ArgumentList "{state}","{service_name}" -Verb RunAs -WindowStyle Hidden"', stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+        p = subprocess.Popen(f'Powershell -Command "Start-Process sc -ArgumentList \\\"{state} \\\"\\\"{service_name}\\\"\\\"\\\" -Verb RunAs -WindowStyle Hidden"', stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
         exit_code = p.wait()
         if exit_code != 0:
             out, err = p.communicate()
