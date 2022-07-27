@@ -4,7 +4,7 @@
   "Name": "Window Services",
   "Description": "Start and stop Windows services.",
   "Author": "Garulf",
-  "Version": "1.1.4",
+  "Version": "1.1.5",
   "Language": "python",
   "Website": "https://github.com/Garulf/window-services",
   "IcoPath": "./icons/cog.png",
