@@ -1,1 +1,1 @@
-git+https://github.com/garulf/flox@v0.4.0#egg=flox
+pyflowlauncher[all]==1.2.2
