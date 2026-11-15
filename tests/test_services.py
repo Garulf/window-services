@@ -54,3 +54,8 @@ def test_services_with_localized_field_names_are_listed():
 
 def test_leading_blank_line_does_not_drop_the_first_service():
     assert describe(parse_services("\r\n" + SC_OUTPUT)) == describe(parse_services(SC_OUTPUT))
+
+
+def test_display_names_containing_a_colon_are_kept_whole():
+    services = parse_services(sc_output(sc_block("AcmeSync", "Acme Sync: File Watcher", "STOPPED")))
+    assert describe(services) == [("AcmeSync", "Acme Sync: File Watcher", "STOPPED")]

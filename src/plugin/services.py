@@ -33,7 +33,7 @@ class Service:
 
 
 def field_value(line: str) -> str:
-    return line.split(":")[1].strip()
+    return line.split(":", 1)[1].strip()
 
 
 def parse_block(block: str) -> Optional[Service]:
