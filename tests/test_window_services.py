@@ -47,11 +47,23 @@ def test_icons_exist():
         assert icon.is_file()
 
 
-def test_context_menu_offers_start_and_stop():
+def test_context_menu_offers_start_stop_and_restart():
     results = as_json(context_menu(["Acme Agent"]))
-    assert [r["Title"] for r in results] == ["Start Service", "Stop Service"]
-    assert [r["JsonRPCAction"]["Parameters"] for r in results] == [["Acme Agent", "start"], ["Acme Agent", "stop"]]
+    assert [r["Title"] for r in results] == ["Start Service", "Stop Service", "Restart Service"]
+    assert [r["JsonRPCAction"]["Parameters"] for r in results] == [
+        ["Acme Agent", "start"],
+        ["Acme Agent", "stop"],
+        ["Acme Agent", "restart"],
+    ]
     assert all(r["JsonRPCAction"]["Method"] == "control_service" for r in results)
+    assert all(Path(r["IcoPath"]).is_file() for r in results)
+
+
+def test_restart_runs_restart_service_elevated(shell):
+    run(control_service("Acme's Agent", "restart"))
+    assert shell.commands == [
+        'Powershell -Command "Start-Process powershell -ArgumentList \\"Restart-Service -Name \'Acme\'\'s Agent\'\\" -Verb RunAs -WindowStyle Hidden"'
+    ]
 
 
 def test_control_service_elevates_sc_through_powershell(shell):

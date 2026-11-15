@@ -14,6 +14,7 @@ SERVICE_RUNNING = ICON_DIR / "cog-play.png"
 SERVICE_STOPPED = ICON_DIR / "cog-stop.png"
 SERVICE_START = ICON_DIR / "play.png"
 SERVICE_STOP = ICON_DIR / "stop.png"
+SERVICE_RESTART = ICON_DIR / "restart.png"
 
 plugin = Plugin(launcher=FlowLauncherV2())
 shell = Shell()
@@ -65,11 +66,23 @@ def context_results(service_name: str) -> List[Result]:
             subtitle=f"Stop {service_name} service",
             icon=SERVICE_STOP,
         ).add_action(control_service, [service_name, "stop"]),
+        Result(
+            title="Restart Service",
+            subtitle=f"Restart {service_name} service",
+            icon=SERVICE_RESTART,
+        ).add_action(control_service, [service_name, "restart"]),
     ]
 
 
 def control_command(service_name: str, state: str) -> str:
+    if state == "restart":
+        return restart_command(service_name)
     return f'Powershell -Command "Start-Process sc -ArgumentList \\\"{state} \\\"\\\"{service_name}\\\"\\\"\\\" -Verb RunAs -WindowStyle Hidden"'
+
+
+def restart_command(service_name: str) -> str:
+    quoted = service_name.replace("'", "''")
+    return f'Powershell -Command "Start-Process powershell -ArgumentList \\\"Restart-Service -Name \'{quoted}\'\\\" -Verb RunAs -WindowStyle Hidden"'
 
 
 def run_elevated(command: str) -> None:
