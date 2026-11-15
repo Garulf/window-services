@@ -59,3 +59,12 @@ def test_leading_blank_line_does_not_drop_the_first_service():
 def test_display_names_containing_a_colon_are_kept_whole():
     services = parse_services(sc_output(sc_block("AcmeSync", "Acme Sync: File Watcher", "STOPPED")))
     assert describe(services) == [("AcmeSync", "Acme Sync: File Watcher", "STOPPED")]
+
+
+def test_code_page_ignores_trailing_punctuation():
+    shell = FakeShell(
+        sc=sc_output(sc_block("Spooler", "Druckwarteschlange für Aufträge", "RUNNING")),
+        chcp="Aktive Codepage: 850.\r\n",
+        encoding="cp850",
+    )
+    assert describe(get_services(shell)) == [("Spooler", "Druckwarteschlange für Aufträge", "RUNNING")]

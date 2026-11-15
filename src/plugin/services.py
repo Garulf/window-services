@@ -9,7 +9,8 @@ from shell import Shell
 CODE_PAGE_COMMAND = "chcp"
 QUERY_COMMAND = "sc query type= service state= all"
 
-BLOCK_SEPARATOR = re.compile(r"\r?\n\s*\r?\n")
+CODE_PAGE = re.compile(r":\s*(\d+)")
+BLOCK_SEPARATOR =re.compile(r"\r?\n\s*\r?\n")
 STATE_LINE = re.compile(r":\s*(\d+)\s+(\S+)")
 STATES = {
     1: "STOPPED",
@@ -49,7 +50,7 @@ def parse_block(block: str) -> Optional[Service]:
 
 
 def code_page(shell: Shell) -> str:
-    return shell.output(CODE_PAGE_COMMAND, text=True).split(":")[1].strip()
+    return CODE_PAGE.search(shell.output(CODE_PAGE_COMMAND, text=True)).group(1)
 
 
 def decode(output: bytes, page: str) -> str:
