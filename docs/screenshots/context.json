@@ -1,0 +1,26 @@
+{
+  "keyword": "ws",
+  "query": "spooler",
+  "icon": "../../data/icon.png",
+  "max_results": 3,
+  "selection": 2,
+  "results": [
+    {
+      "title": "Start Service",
+      "subtitle": "Start Spooler service",
+      "icon": "../../src/plugin/icons/play.png"
+    },
+    {
+      "title": "Stop Service",
+      "subtitle": "Stop Spooler service",
+      "icon": "../../src/plugin/icons/stop.png"
+    },
+    {
+      "title": "Restart Service",
+      "subtitle": "Restart Spooler service",
+      "icon": "../../src/plugin/icons/restart.png"
+    }
+  ],
+  "query_suggestion": "",
+  "show_caret": false
+}

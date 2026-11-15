@@ -1,0 +1,31 @@
+{
+  "keyword": "ws",
+  "query": "windows",
+  "icon": "../../data/icon.png",
+  "max_results": 4,
+  "selection": 0,
+  "results": [
+    {
+      "title": "wuauserv (Windows Update)",
+      "subtitle": "STOPPED - Press ENTER to toggle service",
+      "icon": "../../src/plugin/icons/cog-stop.png"
+    },
+    {
+      "title": "WSearch (Windows Search)",
+      "subtitle": "RUNNING - Press ENTER to toggle service",
+      "icon": "../../src/plugin/icons/cog-play.png"
+    },
+    {
+      "title": "Winmgmt (Windows Management Instrumentation)",
+      "subtitle": "RUNNING - Press ENTER to toggle service",
+      "icon": "../../src/plugin/icons/cog-play.png"
+    },
+    {
+      "title": "W32Time (Windows Time)",
+      "subtitle": "STOPPED - Press ENTER to toggle service",
+      "icon": "../../src/plugin/icons/cog-stop.png"
+    }
+  ],
+  "query_suggestion": "",
+  "show_caret": true
+}

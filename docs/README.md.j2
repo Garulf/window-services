@@ -1,0 +1,75 @@
+{% extends "base.md.j2" %}
+
+{% block badges_extra %} [![Downloads](https://img.shields.io/github/downloads/{{ project.owner }}/{{ project.repo }}/total)]({{ project.url }}/releases/latest){% endblock %}
+
+{% block usage %}
+## Features
+
+* **Every service.** Lists all Windows services with their current state.
+* **Search by either name.** Matches the service name (`wuauserv`) or the display name (`Windows Update`).
+* **Toggle with Enter.** Stops a running service and starts a stopped one.
+* **Start, stop or restart.** All three are in the context menu.
+* **Any Windows language.** Reads `sc` output in the console's code page, including translated field names.
+
+## Usage
+
+Type `ws` followed by part of a service name:
+
+```
+ws bluetooth
+```
+
+{{ screenshot("search", alt="Window Services search results in Flow Launcher") }}
+
+Press `Enter` to toggle the selected service. Windows asks for administrator approval (UAC)
+before it changes a service.
+
+### Context menu
+
+Open the context menu (`Shift+Enter` or right-click) to start, stop or restart a service:
+
+{{ screenshot("context", alt="Start, Stop and Restart Service in the context menu") }}
+
+## Installation
+
+### Flow Launcher
+
+In Flow Launcher, type:
+
+```
+pm install window services
+```
+
+{{ screenshot("install", alt="Flow Launcher plugin manager installing Window Services") }}
+
+### Manual installation
+
+Download `window-services-<version>.zip` from the [latest release]({{ project.url }}/releases/latest) and unzip it into
+`%appdata%\FlowLauncher\Plugins`, then restart Flow Launcher.
+
+Pre-releases of the next version are published from the open release PR on the
+[releases page]({{ project.url }}/releases) for testing. Flow Launcher won't offer them as updates.
+
+## Requirements
+
+* Windows 10 or 11
+* Flow Launcher 1.17.0 or newer
+* Python 3.8 or newer, which Flow Launcher can install for you
+
+## Special thanks
+
+[@taooceros](https://github.com/taooceros) and [@onesounds](https://github.com/onesounds)
+{% if changelog(3) %}
+
+## Changelog
+
+{{ changelog(3) }}
+
+See [CHANGELOG.md](CHANGELOG.md) for the full history.
+{% endif %}
+{% endblock %}
+
+{% block screenshots %}{% endblock %}
+{% block install %}{% endblock %}
+{% block contributing %}{% endblock %}
+{% block license %}{% endblock %}

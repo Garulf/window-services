@@ -1,0 +1,26 @@
+{
+  "keyword": "ws",
+  "query": "bluetooth",
+  "icon": "../../data/icon.png",
+  "max_results": 3,
+  "selection": 0,
+  "results": [
+    {
+      "title": "bthserv (Bluetooth Support Service)",
+      "subtitle": "RUNNING - Press ENTER to toggle service",
+      "icon": "../../src/plugin/icons/cog-play.png"
+    },
+    {
+      "title": "BTAGService (Bluetooth Audio Gateway Service)",
+      "subtitle": "STOPPED - Press ENTER to toggle service",
+      "icon": "../../src/plugin/icons/cog-stop.png"
+    },
+    {
+      "title": "BluetoothUserService_4f2a1 (Bluetooth User Support Service)",
+      "subtitle": "RUNNING - Press ENTER to toggle service",
+      "icon": "../../src/plugin/icons/cog-play.png"
+    }
+  ],
+  "query_suggestion": "",
+  "show_caret": false
+}
