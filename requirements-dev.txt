@@ -1,0 +1,4 @@
+-r requirements.txt
+pytest==8.3.5
+readwright==0.5.0; python_version >= "3.11"
+flow-render==0.15.0; python_version >= "3.10"

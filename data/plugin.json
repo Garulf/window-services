@@ -5,8 +5,8 @@
   "Description": "Start and stop Windows services.",
   "Author": "Garulf",
   "Version": "1.1.5",
-  "Language": "python",
+  "Language": "python_v2",
   "Website": "https://github.com/Garulf/window-services",
-  "IcoPath": "./icons/cog.png",
+  "IcoPath": "icon.png",
   "ExecuteFileName": "run.py"
 }
